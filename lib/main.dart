@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_authentiation/auth_service/auth_gate.dart';
 import 'package:supabase_authentiation/ui/screen1.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Screen1(),
+      home: AuthGate(),
     );
   }
 }

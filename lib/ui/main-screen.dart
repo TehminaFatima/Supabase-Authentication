@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_authentiation/auth_service/authentication.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -8,6 +10,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final authService = AuthService();
+  void logout() async {
+    await authService.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +26,9 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
         actions: [
           ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                logout();
+              },
               child: Icon(
                 Icons.logout,
                 color: Colors.blueGrey[600],

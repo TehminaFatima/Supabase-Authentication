@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:supabase_authentiation/auth_service/authentication.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _Screen1State();
+  State<SignUpScreen> createState() => _SignUpState();
 }
 
-class _Screen1State extends State<SignUpScreen> {
+class _SignUpState extends State<SignUpScreen> {
+  final authService = AuthService();
+  final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  void SignUp() async {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    final name = _nameController.text;
+    final confirmPassword = _confirmPasswordController.text;
+
+    try {
+      await authService.signUpWithEmailPassword(email, password);
+      Navigator.pop(context);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +70,7 @@ class _Screen1State extends State<SignUpScreen> {
                       ),
                       padding: EdgeInsets.all(8.0),
                       child: TextFormField(
+                        controller: _nameController,
                         decoration: InputDecoration(
                           hintText: "Enter Your Name",
                           hintStyle: TextStyle(color: Colors.blueGrey[800]),
@@ -66,6 +88,7 @@ class _Screen1State extends State<SignUpScreen> {
                       ),
                       padding: EdgeInsets.all(8.0),
                       child: TextFormField(
+                        controller: _emailController,
                         decoration: InputDecoration(
                           hintText: "Enter Your Email Address",
                           hintStyle: TextStyle(color: Colors.blueGrey[800]),
@@ -83,6 +106,7 @@ class _Screen1State extends State<SignUpScreen> {
                       ),
                       padding: EdgeInsets.all(8.0),
                       child: TextFormField(
+                        controller: _passwordController,
                         decoration: InputDecoration(
                           hintText: "Enter Your Password",
                           hintStyle: TextStyle(color: Colors.blueGrey[800]),
@@ -100,6 +124,7 @@ class _Screen1State extends State<SignUpScreen> {
                       ),
                       padding: EdgeInsets.all(8.0),
                       child: TextFormField(
+                        controller: _confirmPasswordController,
                         decoration: InputDecoration(
                           hintText: "Confirm Password",
                           hintStyle: TextStyle(color: Colors.blueGrey[800]),
@@ -122,9 +147,9 @@ class _Screen1State extends State<SignUpScreen> {
                     ),
                     onPressed: () {
                       // Define your action here
-                      print('Button Pressed!');
+                      SignUp();
                     },
-                    child: Text('Click Me'),
+                    child: Text('SignUp'),
                   ),
                 ],
               ),

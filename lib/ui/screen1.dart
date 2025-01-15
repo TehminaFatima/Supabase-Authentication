@@ -1,7 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:supabase_authentiation/ui/sign-in-screen.dart';
+import 'package:supabase_authentiation/ui/sign-up-screen.dart';
 
 class Screen1 extends StatefulWidget {
   const Screen1({super.key});
@@ -56,7 +56,7 @@ class _Screen1State extends State<Screen1> {
                     elevation: 5.0, // Shadow elevation
                   ),
                   onPressed: () {
-                    // Define your action here
+                    Get.to(SignUpScreen());
                   },
                   child: Text('SignUp'),
                 ),
@@ -79,7 +79,7 @@ class _Screen1State extends State<Screen1> {
                     elevation: 5.0, // Shadow elevation
                   ),
                   onPressed: () {
-                    // Define your action here
+                    Get.to(SignInScreen());
                   },
                   child: Text('SignIn'),
                 ),
