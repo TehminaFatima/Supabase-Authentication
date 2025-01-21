@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_authentiation/auth_service/authentication.dart';
+import 'package:supabase_authentiation/ui/main-screen.dart';
+import 'package:supabase_authentiation/ui/sign-up-screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -21,7 +23,8 @@ class _SignInState extends State<SignInScreen> {
 
     try {
       await authService.signInWithEmailPassword(email, password);
-      Navigator.pop(context);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MainScreen()));
     } catch (e) {
       print(e);
     }
@@ -57,7 +60,7 @@ class _SignInState extends State<SignInScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
                       height: Get.height / 12,
@@ -92,6 +95,9 @@ class _SignInState extends State<SignInScreen> {
                           border: InputBorder.none,
                         ),
                       )),
+                  SizedBox(
+                    height: 20,
+                  ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -109,6 +115,31 @@ class _SignInState extends State<SignInScreen> {
                     },
                     child: Text('SignIn'),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text("Don't have an account ?"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpScreen()));
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(color: Colors.blueGrey[800]),
+                          )),
+                    ],
+                  )
                 ],
               ),
             ),
