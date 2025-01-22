@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_authentiation/auth_service/authentication.dart';
+import 'package:supabase_authentiation/ui/sign-in-screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -60,7 +61,7 @@ class _SignUpState extends State<SignUpScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
                       height: Get.height / 12,
@@ -150,6 +151,28 @@ class _SignUpState extends State<SignUpScreen> {
                       SignUp();
                     },
                     child: Text('SignUp'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text("Don't have an account ?"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignInScreen()));
+                          },
+                          child: Text(
+                            "Sign In",
+                            style: TextStyle(color: Colors.blueGrey[800]),
+                          )),
+                    ],
                   ),
                 ],
               ),

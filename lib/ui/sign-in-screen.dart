@@ -42,108 +42,124 @@ class _SignInState extends State<SignInScreen> {
         backgroundColor: Colors.blueGrey,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.blueGrey[200],
-                borderRadius: BorderRadius.circular(40),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
-                  ),
-                ]),
-            height: Get.height / 1.5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                      height: Get.height / 12,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.blueGrey[100],
-                      ),
-                      padding: EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          hintText: "Enter Your Email Address",
-                          hintStyle: TextStyle(color: Colors.blueGrey[800]),
-                          border: InputBorder.none,
-                        ),
-                      )),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                      height: Get.height / 12,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.blueGrey[100],
-                      ),
-                      padding: EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          hintText: "Enter Your Password",
-                          hintStyle: TextStyle(color: Colors.blueGrey[800]),
-                          border: InputBorder.none,
-                        ),
-                      )),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(10.0), // Circular border
-                      ),
-                      backgroundColor: Colors.blueGrey[500],
-                      foregroundColor: Colors.white, // Custom button color
-                      // Text color
-                      elevation: 5.0, // Shadow elevation
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.blueGrey[200],
+                  borderRadius: BorderRadius.circular(40),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
                     ),
-                    onPressed: () {
-                      // Define your action here
-                      signin();
-                    },
-                    child: Text('SignIn'),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text("Don't have an account ?"),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpScreen()));
-                          },
-                          child: Text(
-                            "Sign Up",
-                            style: TextStyle(color: Colors.blueGrey[800]),
-                          )),
-                    ],
-                  )
-                ],
+                  ]),
+              height: Get.height / 1.5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                        height: Get.height / 12,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blueGrey[100],
+                        ),
+                        padding: EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            hintText: "Enter Your Email Address",
+                            hintStyle: TextStyle(color: Colors.blueGrey[800]),
+                            border: InputBorder.none,
+                          ),
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                        height: Get.height / 12,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blueGrey[100],
+                        ),
+                        padding: EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                            hintText: "Enter Your Password",
+                            hintStyle: TextStyle(color: Colors.blueGrey[800]),
+                            border: InputBorder.none,
+                          ),
+                        )),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(10.0), // Circular border
+                        ),
+                        backgroundColor: Colors.blueGrey[500],
+                        foregroundColor: Colors.white, // Custom button color
+                        // Text color
+                        elevation: 5.0, // Shadow elevation
+                      ),
+                      onPressed: () {
+                        // Define your action here
+                        signin();
+                      },
+                      child: Text('SignIn'),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text("Don't have an account ?"),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignUpScreen()));
+                            },
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(color: Colors.blueGrey[800]),
+                            )),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  children: [
+                    Icon(Icons.asset("")),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Sign In with Google",
+                          style: TextStyle(color: Colors.blueGrey[700]),
+                        )),
+                  ],
+                ))
+          ],
         ),
       ),
     );
