@@ -45,6 +45,7 @@ class _SignInState extends State<SignInScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Container(
               decoration: BoxDecoration(
@@ -146,19 +147,17 @@ class _SignInState extends State<SignInScreen> {
                 ),
               ),
             ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  children: [
-                    Icon(Icons.asset("")),
-                    TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Sign In with Google",
-                          style: TextStyle(color: Colors.blueGrey[700]),
-                        )),
-                  ],
-                ))
+            Row(
+              children: [
+                icon(Icon: Image.asset("assets/Gicon.png")),
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Sign In with Google",
+                      style: TextStyle(color: Colors.blueGrey[700]),
+                    )),
+              ],
+            )
           ],
         ),
       ),
