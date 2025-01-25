@@ -33,6 +33,7 @@ class _SignInState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
         title: Text(
           "SignIn Screen",
@@ -41,13 +42,14 @@ class _SignInState extends State<SignInScreen> {
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Container(
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              top: 40.0,
+            ),
+            child: Container(
+              margin: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                   color: Colors.blueGrey[200],
                   borderRadius: BorderRadius.circular(40),
@@ -147,19 +149,32 @@ class _SignInState extends State<SignInScreen> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                icon(Icon: Image.asset("assets/Gicon.png")),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Sign In with Google",
-                      style: TextStyle(color: Colors.blueGrey[700]),
-                    )),
-              ],
-            )
-          ],
-        ),
+          ),
+          Container(
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.26,
+              top: MediaQuery.of(context).size.width * 0.1,
+            ),
+            child: GestureDetector(
+              onTap: () => authService.signInWithGoogle(),
+              child: Row(
+                children: [
+                  Image(
+                    height: 20,
+                    image: AssetImage("assets/Gicon.png"),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Sign In with Google",
+                    style: TextStyle(color: Colors.blueGrey[700]),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -47,3 +47,19 @@
 	<true/>
 </dict>
 </plist>
+<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
+<!-- Google Sign-in Section -->
+<key>CFBundleURLTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<!-- TODO Replace this value: -->
+			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+			<string>com.googleusercontent.apps.1075514798882-lpug50o8jnt9h22d0chs8nlapa3fgpeb.apps.googleusercontent.com</string>
+		</array>
+	</dict>
+</array>
+<!-- End of the Google Sign-in Section -->
