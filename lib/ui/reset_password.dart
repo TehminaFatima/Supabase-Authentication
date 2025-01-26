@@ -1,43 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:supabase_authentiation/auth_service/authentication.dart';
-import 'package:supabase_authentiation/ui/main-screen.dart';
-import 'package:supabase_authentiation/ui/reset_password.dart';
-import 'package:supabase_authentiation/ui/sign-up-screen.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class ResetPassword extends StatefulWidget {
+  const ResetPassword({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInState();
+  State<ResetPassword> createState() => _ResetPasswordState();
 }
 
-class _SignInState extends State<SignInScreen> {
-  final authService = AuthService();
-  final _emailController = TextEditingController();
-
-  final _passwordController = TextEditingController();
-
-  void signin() async {
-    final email = _emailController.text;
-    final password = _passwordController.text;
-
-    try {
-      await authService.signInWithEmailPassword(email, password);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MainScreen()));
-    } catch (e) {
-      print(e);
-    }
-  }
-
+class _ResetPasswordState extends State<ResetPassword> {
+  final _emailcontroller = TextEditingController();
+  final _newPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
         title: Text(
-          "SignIn Screen",
+          "Reset Password",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -50,6 +29,7 @@ class _SignInState extends State<SignInScreen> {
               top: 40.0,
             ),
             child: Container(
+              padding: EdgeInsets.only(top: 130),
               margin: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                   color: Colors.blueGrey[200],
@@ -66,7 +46,6 @@ class _SignInState extends State<SignInScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
                         height: Get.height / 12,
@@ -76,7 +55,7 @@ class _SignInState extends State<SignInScreen> {
                         ),
                         padding: EdgeInsets.all(8.0),
                         child: TextFormField(
-                          controller: _emailController,
+                          controller: _emailcontroller,
                           decoration: InputDecoration(
                             hintText: "Enter Your Email Address",
                             hintStyle: TextStyle(color: Colors.blueGrey[800]),
@@ -94,25 +73,13 @@ class _SignInState extends State<SignInScreen> {
                         ),
                         padding: EdgeInsets.all(8.0),
                         child: TextFormField(
-                          controller: _passwordController,
+                          controller: _newPasswordController,
                           decoration: InputDecoration(
-                            hintText: "Enter Your Password",
+                            hintText: "Enter New Password",
                             hintStyle: TextStyle(color: Colors.blueGrey[800]),
                             border: InputBorder.none,
                           ),
                         )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => ResetPassword());
-                      },
-                      child: Container(
-                        padding: EdgeInsets.only(left: 190),
-                        child: Text("forget Password?"),
-                      ),
-                    ),
                     SizedBox(
                       height: 10,
                     ),
@@ -129,64 +96,17 @@ class _SignInState extends State<SignInScreen> {
                       ),
                       onPressed: () {
                         // Define your action here
-                        signin();
                       },
-                      child: Text('SignIn'),
+                      child: Text('Reset Your Password'),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text("Don't have an account ?"),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignUpScreen()));
-                            },
-                            child: Text(
-                              "Sign Up",
-                              style: TextStyle(color: Colors.blueGrey[800]),
-                            )),
-                      ],
-                    )
                   ],
                 ),
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.26,
-              top: MediaQuery.of(context).size.width * 0.1,
-            ),
-            child: GestureDetector(
-              onTap: () => authService.signInWithGoogle(),
-              child: Row(
-                children: [
-                  Image(
-                    height: 20,
-                    image: AssetImage("assets/Gicon.png"),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Sign In with Google",
-                    style: TextStyle(color: Colors.blueGrey[700]),
-                  ),
-                ],
-              ),
-            ),
-          )
         ],
       ),
     );
