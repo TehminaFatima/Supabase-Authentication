@@ -1,6 +1,7 @@
 //import 'package:supabase_authentiation/auth_service/google_signin.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter/material.dart';
 
 class AuthService {
   final SupabaseClient _supabase = Supabase.instance.client;
@@ -74,5 +75,32 @@ class AuthService {
       idToken: idToken,
       accessToken: accessToken,
     );
+  }
+
+  Future<void> forgotPassword({
+    required String email,
+    required BuildContext context,
+  }) async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    if (email.isEmpty) {
+      scaffoldMessenger.showSnackBar(
+        SnackBar(content: Text('Please enter your email address')),
+      );
+      return;
+    }
+
+    try {
+      // Send password reset email
+      await Supabase.instance.client.auth.resetPasswordForEmail(email);
+
+      scaffoldMessenger.showSnackBar(
+        SnackBar(content: Text('Password reset email sent! Check your inbox.')),
+      );
+    } catch (e) {
+      scaffoldMessenger.showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+    }
   }
 }

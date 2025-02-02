@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:supabase_authentiation/auth_service/authentication.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
@@ -11,6 +12,8 @@ class ResetPassword extends StatefulWidget {
 class _ResetPasswordState extends State<ResetPassword> {
   final _emailcontroller = TextEditingController();
   final _newPasswordController = TextEditingController();
+  final authService = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +98,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                         elevation: 5.0, // Shadow elevation
                       ),
                       onPressed: () {
-                        // Define your action here
+                        final email = _emailcontroller.text.trim();
+                        authService.forgotPassword(
+                            email: email, context: context);
                       },
                       child: Text('Reset Your Password'),
                     ),
