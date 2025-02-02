@@ -4,9 +4,20 @@ import 'package:supabase_authentiation/auth_service/authentication.dart'; // Ens
 
 class PopUpContainer extends GetxController {
   var showContainer = false.obs;
+  var textList = <String>[].obs;
 
   void toggleContainer() {
     showContainer.value = !showContainer.value;
+  }
+
+  void clear() {
+    textList.clear();
+  }
+
+  void addText(String text) {
+    if (text.isNotEmpty) {
+      textList.add(text);
+    }
   }
 }
 
@@ -19,8 +30,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final authService = AuthService();
-  final PopUpContainer _popUpContainer =
-      Get.put(PopUpContainer()); // Initialize the controller
+  final PopUpContainer _popUpContainer = Get.put(PopUpContainer());
+  final TextEditingController _textController = TextEditingController();
 
   void logout() async {
     await authService.signOut();
@@ -52,22 +63,38 @@ class _MainScreenState extends State<MainScreen> {
         },
         child: const Icon(Icons.add),
       ),
-      body: Obx(() {
-        return Stack(
-          children: [
-            // Main content
-            const Center(
-              child: Text('Press the FAB to see the container!'),
-            ),
-
-            // Popup Container
-            if (_popUpContainer.showContainer.value)
-              Center(
-                child: _buildContainer(),
+      body: Stack(
+        children: [
+          // Main content
+          Column(
+            children: [
+              Expanded(
+                child: Obx(() {
+                  return ListView.builder(
+                    itemCount: _popUpContainer.textList.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(_popUpContainer.textList[index]),
+                      );
+                    },
+                  );
+                }),
               ),
-          ],
-        );
-      }),
+            ],
+          ),
+
+          // Popup Container
+          Obx(() {
+            if (_popUpContainer.showContainer.value) {
+              return Center(
+                child: _buildContainer(),
+              );
+            } else {
+              return const SizedBox.shrink(); // Hide the container
+            }
+          }),
+        ],
+      ),
     );
   }
 
@@ -83,8 +110,9 @@ class _MainScreenState extends State<MainScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const TextField(
-            decoration: InputDecoration(
+          TextField(
+            controller: _textController,
+            decoration: const InputDecoration(
               labelText: 'Enter something',
               border: OutlineInputBorder(),
             ),
@@ -95,13 +123,19 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  // Add functionality here
+                  // Add text to the list
+                  _popUpContainer.addText(_textController.text);
+                  // Clear the text field
+                  _textController.clear();
+                  // Close the container
+                  _popUpContainer.toggleContainer();
                 },
                 child: const Text("Add"),
               ),
               ElevatedButton(
                 onPressed: () {
-                  _popUpContainer.toggleContainer(); // Close the container
+                  // Close the container without adding text
+                  _popUpContainer.toggleContainer();
                 },
                 child: const Text("Cancel"),
               ),
