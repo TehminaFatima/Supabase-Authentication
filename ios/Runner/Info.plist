@@ -47,6 +47,8 @@
 	<true/>
 </dict>
 </plist>
+<key>NSCameraUsageDescription</key>
+<string>We need access to your camera to capture images.</string>
 <!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
 <!-- Google Sign-in Section -->
 <key>CFBundleURLTypes</key>
