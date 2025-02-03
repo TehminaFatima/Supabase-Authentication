@@ -56,23 +56,28 @@ class _MainScreenState extends State<MainScreen> {
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
-        Obx(() => AnimatedOpacity(
-              opacity: menuController.isExpanded.value ? 1 : 0,
+        Obx(() => AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _fabButton(
-                      Icons.add, "Add Note", _popUpContainer.toggleContainer),
-                  _fabButton(Icons.add_a_photo, "Gallery", () {}),
-                  _fabButton(Icons.camera, "Camera", () {}),
-                  _fabButton(Icons.mic, "Mic", () {}),
-                ]
-                    .map((w) => Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: w,
-                        ))
-                    .toList(),
+              height:
+                  menuController.isExpanded.value ? 290 : 0, // Adjusted height
+              child: SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _fabButton(
+                        Icons.add, "Add Note", _popUpContainer.toggleContainer),
+                    _fabButton(Icons.add_a_photo, "Gallery", () {}),
+                    _fabButton(Icons.camera_alt, "Camera", () {}),
+                    _fabButton(Icons.mic, "Mic", () {}),
+                    //_fabButton(Icons.favorite, "heroTag", () {})
+                  ]
+                      .map((w) => Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: w,
+                          ))
+                      .toList(),
+                ),
               ),
             )),
         Obx(() => FloatingActionButton(
@@ -97,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
       },
       backgroundColor: Colors.blueGrey,
       mini: true,
-      child: Icon(icon),
+      child: Icon(icon, color: Colors.white, size: 25), // Explicit size
     );
   }
 

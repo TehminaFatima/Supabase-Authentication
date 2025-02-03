@@ -6,6 +6,7 @@ class ExpandableMenuController extends GetxController
   late AnimationController animationController;
   late Animation<double> heightAnimation;
   final RxBool isExpanded = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -40,12 +41,14 @@ class ExpandableIconMenu extends StatelessWidget {
   final List<Widget> expandedChildren;
   final Widget mainIcon;
   final double spacing;
+  final Color iconColor;
 
   const ExpandableIconMenu({
     super.key,
     required this.expandedChildren,
     required this.mainIcon,
     this.spacing = 10,
+    this.iconColor = Colors.white,
   });
 
   @override
@@ -55,16 +58,23 @@ class ExpandableIconMenu extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizeTransition(
-          sizeFactor: controller.heightAnimation,
-          axisAlignment: -1,
-          child: Column(
-            children: expandedChildren
-                .map((child) => Padding(
-                      padding: EdgeInsets.only(bottom: spacing),
-                      child: child,
-                    ))
-                .toList(),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          height:
+              controller.isExpanded.value ? expandedChildren.length * 60 : 0,
+          child: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+              children: expandedChildren
+                  .map((child) => Padding(
+                        padding: EdgeInsets.only(bottom: spacing),
+                        child: IconTheme(
+                          data: IconThemeData(color: iconColor),
+                          child: child,
+                        ),
+                      ))
+                  .toList(),
+            ),
           ),
         ),
         GestureDetector(
@@ -72,7 +82,10 @@ class ExpandableIconMenu extends StatelessWidget {
           child: AnimatedRotation(
             duration: const Duration(milliseconds: 300),
             turns: controller.isExpanded.value ? 0.5 : 0,
-            child: mainIcon,
+            child: IconTheme(
+              data: IconThemeData(color: iconColor),
+              child: mainIcon,
+            ),
           ),
         ),
       ],
