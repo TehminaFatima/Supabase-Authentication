@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_authentiation/auth_service/authentication.dart';
+import '../controllers/image-note-controller.dart';
 import '../controllers/pop-up-container.dart';
 import '../controllers/slideable-widget.dart';
 
@@ -17,6 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   final ExpandableMenuController menuController =
       Get.put(ExpandableMenuController());
   final TextEditingController _textController = TextEditingController();
+  final ImageNoteController _controller = Get.put(ImageNoteController());
 
   @override
   void dispose() {
@@ -68,7 +70,9 @@ class _MainScreenState extends State<MainScreen> {
                     _fabButton(
                         Icons.add, "Add Note", _popUpContainer.toggleContainer),
                     _fabButton(Icons.add_a_photo, "Gallery", () {}),
-                    _fabButton(Icons.camera_alt, "Camera", () {}),
+                    _fabButton(Icons.camera_alt, "Camera", () {
+                      _controller.capturedImage();
+                    }),
                     _fabButton(Icons.mic, "Mic", () {}),
                     //_fabButton(Icons.favorite, "heroTag", () {})
                   ]

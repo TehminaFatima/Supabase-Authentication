@@ -17,9 +17,12 @@ Future<void> main() async {
 
   // Initialize Hive
   await Hive.initFlutter();
+  Hive.registerAdapter(ImageNoteAdapter()); // Register the adapter
+
   await Future.wait([
     Hive.openBox<String>('textList'),
     Hive.openBox<bool>('checkList'),
+    Hive.openBox('imageNotesBox')
   ]);
 
   runApp(const MyApp());
